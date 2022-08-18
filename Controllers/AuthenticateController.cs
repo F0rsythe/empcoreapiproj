@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.AspNetCore.Authorization;
 
 namespace empcoreapiproj.Controllers
 {
@@ -79,6 +80,8 @@ namespace empcoreapiproj.Controllers
             }
             return Ok(new Response { Status = "Success", Message = "User created succesfully" });
         }
+        
+        [Authorize(Roles = UserRoles.Admin) ]
         [HttpPost]
         [Route("Role-admin")]
         public async Task<IActionResult> AdminRole([FromBody] Register mod)
